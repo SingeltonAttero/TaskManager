@@ -7,4 +7,6 @@ import com.arellomobile.mvp.MvpView
  * @author YWeber
  * project TaskManager */
 
-interface MainView : MvpView
+interface MainView : MvpView{
+    fun setText(text:String)
+}

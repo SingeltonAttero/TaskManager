@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import toothpick.Toothpick
 
 class MainActivity : MvpAppCompatActivity(), MainView {
+    override fun setText(text: String) {
+        textTest.text = text
+    }
 
     @InjectPresenter
     lateinit var presenter: MainPresenter

@@ -1,6 +1,8 @@
 package com.weber.yakow.taskmanager.toothpick.module
 
 import android.content.Context
+import com.weber.yakow.taskmanager.model.storage.prefs.CommonsPrefs
+import com.weber.yakow.taskmanager.model.storage.prefs.CommonsPrefsImpl
 import com.weber.yakow.taskmanager.system.ResourceManager
 import com.weber.yakow.taskmanager.system.message.SystemMessageNotifier
 import com.weber.yakow.taskmanager.system.shceduler.AppScheduler
@@ -23,6 +25,7 @@ class AppModule(context: Context) : Module() {
         bind(ResourceManager::class.java).toInstance(ResourceManager(context))
         bind(SystemMessageNotifier::class.java).toInstance(SystemMessageNotifier())
         bind(SchedulersProvider::class.java).toInstance(AppScheduler())
+        bind(CommonsPrefs::class.java).to(CommonsPrefsImpl::class.java).singletonInScope()
         // navigation
         Timber.d("Navigation init")
         val cicerone = Cicerone.create()
