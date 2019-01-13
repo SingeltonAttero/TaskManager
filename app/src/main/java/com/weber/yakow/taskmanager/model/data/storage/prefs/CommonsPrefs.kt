@@ -1,4 +1,4 @@
-package com.weber.yakow.taskmanager.model.storage.prefs
+package com.weber.yakow.taskmanager.model.data.storage.prefs
 
 /**
  * Created on 10.01.19

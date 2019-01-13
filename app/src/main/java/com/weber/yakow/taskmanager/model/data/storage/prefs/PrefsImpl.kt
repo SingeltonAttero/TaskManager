@@ -1,4 +1,4 @@
-package com.weber.yakow.taskmanager.model.storage.prefs
+package com.weber.yakow.taskmanager.model.data.storage.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @author YWeber
  * project TaskManager */
 
-class CommonsPrefsImpl @Inject constructor(private val context: Context) : CommonsPrefs {
+class PrefsImpl @Inject constructor(private val context: Context) : CommonsPrefs {
 
     companion object {
         const val FIRST_LAUNCH_FLAG = "first launch flag"
