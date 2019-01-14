@@ -33,6 +33,4 @@ class PrefsImpl @Inject constructor(private val context: Context) : CommonsPrefs
         set(value) {
             sharedPrefs.edit { putString(DATE_FIRST_LAUNCH, value) }
         }
-
-
 }

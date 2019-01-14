@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
  * project BusinessCart */
 
 interface ComponentDisposableBind {
-    val compositeDisposable:CompositeDisposable
+    val compositeDisposable: CompositeDisposable
     fun clear()
     fun Disposable.bind()
 }

@@ -15,5 +15,5 @@ import com.weber.yakow.taskmanager.model.data.storage.db.entity.PersonContent
     version = 1, exportSchema = false
 )
  abstract class AppDatabase : RoomDatabase() {
-    abstract fun personContentDao() : PersonContentDao
+    abstract fun personContentDao(): PersonContentDao
 }

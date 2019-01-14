@@ -11,6 +11,6 @@ import javax.inject.Provider
  * @author YWeber
  * project TaskManager */
 
-class DatabaseProvider @Inject constructor(val context: Context): Provider<AppDatabase> {
-    override fun get(): AppDatabase = Room.databaseBuilder(context,AppDatabase::class.java,"database").build()
+class DatabaseProvider @Inject constructor(val context: Context) : Provider<AppDatabase> {
+    override fun get(): AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "database").build()
 }

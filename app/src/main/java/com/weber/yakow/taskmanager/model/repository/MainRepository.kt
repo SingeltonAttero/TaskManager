@@ -43,5 +43,4 @@ class MainRepository @Inject constructor(
     fun getPersonContent(): Flowable<List<PersonContent>> = personDao.getAll()
         .subscribeOn(schedulers.io())
         .observeOn(schedulers.ui())
-
 }

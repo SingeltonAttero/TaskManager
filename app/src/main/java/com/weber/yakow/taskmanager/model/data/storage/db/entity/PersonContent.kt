@@ -9,11 +9,12 @@ import android.arch.persistence.room.PrimaryKey
  * project TaskManager */
 
 @Entity(tableName = "person_content")
-data class PersonContent (
+data class PersonContent(
     @PrimaryKey(autoGenerate = true)
-    val id:Int = 0,
-    val nameUser:String,
-    val text:String,
-    val saveTime:String,
-    val priority:Int,
-    val taskText:String)
+    val id: Int = 0,
+    val nameUser: String,
+    val text: String,
+    val saveTime: String,
+    val priority: Int,
+    val taskText: String
+)

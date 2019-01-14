@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.weber.yakow.taskmanager.system.disposable.ComponentDisposableBind
 import com.weber.yakow.taskmanager.system.disposable.ComponentDisposableBindImpl
+import timber.log.Timber
 
 /**
  * Created on 09.01.19
@@ -19,11 +20,13 @@ abstract class BaseFragment : MvpAppCompatFragment(), ComponentDisposableBind by
     abstract val layoutRes: Int @LayoutRes get
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutRes,container,false)
+        return inflater.inflate(layoutRes, container, false)
     }
 
     override fun onDestroy() {
         clear()
         super.onDestroy()
     }
+
+    open fun onBackPressed(){Timber.d("back pressed")}
 }

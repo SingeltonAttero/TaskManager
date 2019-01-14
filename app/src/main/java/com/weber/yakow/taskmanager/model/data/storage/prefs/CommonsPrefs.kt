@@ -6,6 +6,6 @@ package com.weber.yakow.taskmanager.model.data.storage.prefs
  * project TaskManager */
 
 interface CommonsPrefs {
-    var firstLaunchFlag:Boolean
-    var dataFirstLaunch:String
+    var firstLaunchFlag: Boolean
+    var dataFirstLaunch: String
 }

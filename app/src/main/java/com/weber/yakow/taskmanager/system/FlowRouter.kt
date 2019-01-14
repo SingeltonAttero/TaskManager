@@ -11,10 +11,7 @@ import ru.terrakok.cicerone.Screen
 class FlowRouter(private val appRouter: Router) : Router() {
     fun startFlow(screen: Screen) = appRouter.navigateTo(screen)
 
-
     fun newRootFlow(screen: Screen) = appRouter.newRootScreen(screen)
 
-
     fun toExit() = appRouter.exit()
-
 }

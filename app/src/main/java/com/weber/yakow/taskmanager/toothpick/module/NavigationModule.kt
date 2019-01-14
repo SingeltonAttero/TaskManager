@@ -20,5 +20,4 @@ class NavigationModule(router: Router) : Module() {
         bind(FlowRouter::class.java).toInstance(cicerone.router)
         bind(NavigatorHolder::class.java).withName(InnerNavigationHolder::class.java).toInstance(cicerone.navigatorHolder)
     }
-
 }

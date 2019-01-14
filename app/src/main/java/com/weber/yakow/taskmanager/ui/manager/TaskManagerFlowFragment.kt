@@ -1,63 +1,79 @@
-package com.weber.yakow.taskmanager.ui
+package com.weber.yakow.taskmanager.ui.manager
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.weber.yakow.taskmanager.R
 import com.weber.yakow.taskmanager.Screens
 import com.weber.yakow.taskmanager.extension.setLaunchScreen
-import com.weber.yakow.taskmanager.presenter.MainPresenter
-import com.weber.yakow.taskmanager.presenter.MainView
 import com.weber.yakow.taskmanager.toothpick.DI
+import com.weber.yakow.taskmanager.toothpick.module.NavigationModule
+import com.weber.yakow.taskmanager.toothpick.qualifier.InnerNavigationHolder
+import com.weber.yakow.taskmanager.ui.global.BaseFragment
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Screen
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import toothpick.Toothpick
 import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+/**
+ * Created on 15.01.19
+ * @author YWeber
+ * project TaskManager */
 
-    @InjectPresenter
-    lateinit var presenter: MainPresenter
+class TaskManagerFlowFragment : BaseFragment() {
 
-    @ProvidePresenter
-    fun providerPresenter(): MainPresenter = Toothpick
-        .openScope(DI.APP_SCOPE)
-        .getInstance(MainPresenter::class.java)
+    companion object {
+        fun newInstance(): TaskManagerFlowFragment = TaskManagerFlowFragment()
+    }
+
+    override val layoutRes: Int
+        get() = R.layout.fragment_flow_conteiner
 
     @Inject
+    @InnerNavigationHolder
     lateinit var navigatorHolder: NavigatorHolder
 
     private val navigator: SupportAppNavigator by lazy {
-        object : SupportAppNavigator(this, supportFragmentManager, R.id.appMainContainer) {
+        object : SupportAppNavigator(activity,childFragmentManager,R.id.baseFlowContainer){
             override fun setupFragmentTransaction(command: Command?,
                                                   currentFragment: Fragment?,
                                                   nextFragment: Fragment?,
                                                   fragmentTransaction: FragmentTransaction?) {
                 super.setupFragmentTransaction(command, currentFragment, nextFragment, fragmentTransaction)
                 fragmentTransaction?.setReorderingAllowed(true)
-
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        Toothpick.inject(this, Toothpick.openScope(DI.APP_SCOPE))
+        initScope()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        navigator.setLaunchScreen(Screens.AuthFlow)
+        if (childFragmentManager.fragments.isEmpty()){
+            navigator.setLaunchScreen(Screens.TaskManagerScreen)
+        }
+
     }
 
-    override fun onResumeFragments() {
-        super.onResumeFragments()
+    override fun onResume() {
+        super.onResume()
         navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         navigatorHolder.removeNavigator()
         super.onPause()
+    }
+
+    private fun initScope() {
+        val openScopes = Toothpick.openScopes(DI.APP_SCOPE, DI.NAVIGATION_SCOPE)
+        openScopes.installModules(NavigationModule(openScopes.getInstance(Router::class.java)))
+        Toothpick.inject(this,openScopes)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
     }
 }

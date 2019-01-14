@@ -23,7 +23,7 @@ class App : Application() {
         initScope()
     }
 
-    private fun initScope(){
+    private fun initScope() {
         Toothpick.openScope(DI.APP_SCOPE).installModules(AppModule(this))
     }
 
@@ -38,9 +38,8 @@ class App : Application() {
     }
 
     private fun initLogger() {
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
     }
-
 }
