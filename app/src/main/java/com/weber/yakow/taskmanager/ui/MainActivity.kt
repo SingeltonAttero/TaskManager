@@ -13,7 +13,6 @@ import com.weber.yakow.taskmanager.presenter.MainPresenter
 import com.weber.yakow.taskmanager.presenter.MainView
 import com.weber.yakow.taskmanager.toothpick.DI
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Screen
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import toothpick.Toothpick
@@ -34,13 +33,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val navigator: SupportAppNavigator by lazy {
         object : SupportAppNavigator(this, supportFragmentManager, R.id.appMainContainer) {
-            override fun setupFragmentTransaction(command: Command?,
-                                                  currentFragment: Fragment?,
-                                                  nextFragment: Fragment?,
-                                                  fragmentTransaction: FragmentTransaction?) {
+            override fun setupFragmentTransaction(
+                command: Command?,
+                currentFragment: Fragment?,
+                nextFragment: Fragment?,
+                fragmentTransaction: FragmentTransaction?
+            ) {
                 super.setupFragmentTransaction(command, currentFragment, nextFragment, fragmentTransaction)
                 fragmentTransaction?.setReorderingAllowed(true)
-
             }
         }
     }

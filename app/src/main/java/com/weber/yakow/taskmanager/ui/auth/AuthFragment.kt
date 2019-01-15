@@ -40,7 +40,7 @@ class AuthFragment : BaseFragment(), AuthView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         RxView.clicks(loginButton)
-                .debounce(400,TimeUnit.MILLISECONDS)
+                .debounce(400, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     presenter.goToManagerFlow()

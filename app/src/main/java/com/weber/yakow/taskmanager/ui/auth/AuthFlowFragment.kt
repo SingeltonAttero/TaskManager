@@ -29,7 +29,7 @@ class AuthFlowFragment : BaseFlowFragment(), AuthFlowView {
     }
 
     @InjectPresenter
-    lateinit var presenter:AuthFlowPresenter
+    lateinit var presenter: AuthFlowPresenter
 
     @ProvidePresenter
     fun presenterProvider(): AuthFlowPresenter = Toothpick
@@ -40,19 +40,17 @@ class AuthFlowFragment : BaseFlowFragment(), AuthFlowView {
     @InnerNavigationHolder
     override lateinit var navigatorHolder: NavigatorHolder
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (childFragmentManager.fragments.isEmpty()){
+        if (childFragmentManager.fragments.isEmpty()) {
             navigator.setLaunchScreen(Screens.AuthScreen)
         }
-
     }
 
     override fun initScope() {
         val openScopes = Toothpick.openScopes(DI.APP_SCOPE, DI.NAVIGATION_SCOPE)
         openScopes.installModules(NavigationModule(openScopes.getInstance(Router::class.java)))
-        Toothpick.inject(this,openScopes)
+        Toothpick.inject(this, openScopes)
     }
 
     override fun onBackPressed() {
