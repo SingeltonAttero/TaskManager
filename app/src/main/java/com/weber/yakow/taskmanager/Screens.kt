@@ -14,24 +14,21 @@ object Screens {
         }
     }
 
-    object AuthScreen : SupportAppScreen(){
+    object AuthScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return AuthFragment.newInstance()
         }
     }
 
-    object TaskManagerFlow : SupportAppScreen(){
+    object TaskManagerFlow : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return TaskManagerFlowFragment.newInstance()
         }
     }
 
-    object TaskManagerScreen : SupportAppScreen(){
+    object TaskManagerScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return TaskManagerFragment.newInstance()
         }
     }
-
-
-
 }

@@ -31,7 +31,7 @@ class TaskManagerFlowFragment : BaseFlowFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (childFragmentManager.fragments.isEmpty()){
+        if (childFragmentManager.fragments.isEmpty()) {
             navigator.setLaunchScreen(Screens.TaskManagerScreen)
         }
     }
@@ -44,7 +44,7 @@ class TaskManagerFlowFragment : BaseFlowFragment() {
     override fun initScope() {
         val openScopes = Toothpick.openScopes(DI.APP_SCOPE, DI.NAVIGATION_SCOPE)
         openScopes.installModules(NavigationModule(openScopes.getInstance(Router::class.java)))
-        Toothpick.inject(this,openScopes)
+        Toothpick.inject(this, openScopes)
     }
 
     override fun onBackPressed() {
