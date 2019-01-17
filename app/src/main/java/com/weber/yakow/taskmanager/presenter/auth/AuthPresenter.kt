@@ -23,7 +23,10 @@ class AuthPresenter @Inject constructor(
     }
 
     fun goToManagerFlow() {
+
         interactor.dataSaveContent()
+            .doOnSubscribe { viewState.showProgress(true) }
+            .doAfterTerminate { viewState.showProgress(false) }
             .subscribe({
                 router.replaceScreen(Screens.TaskManagerFlow)
             }, {

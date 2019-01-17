@@ -12,6 +12,7 @@ import com.weber.yakow.taskmanager.toothpick.DI
 import com.weber.yakow.taskmanager.ui.global.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
+import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
 import java.util.concurrent.TimeUnit
 
@@ -46,4 +47,9 @@ class AuthFragment : BaseFragment(), AuthView {
                     presenter.goToManagerFlow()
                 }.bind()
     }
+
+    override fun showProgress(progress: Boolean) {
+        progressDialog(progress)
+    }
+
 }

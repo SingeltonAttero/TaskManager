@@ -6,6 +6,7 @@ import com.weber.yakow.taskmanager.model.data.storage.db.entity.PersonContent
 import com.weber.yakow.taskmanager.system.shceduler.SchedulersProvider
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -36,9 +37,10 @@ class MainRepository @Inject constructor(
         }
     }
 
-    fun savePersonContent(): Completable = Completable.fromCallable {
-        personDao.insertAll(listDataSource)
-    }.subscribeOn(schedulers.io()).observeOn(schedulers.ui())
+    fun savePersonContent(): Completable = Completable
+        .fromCallable { personDao.insertAll(listDataSource) }
+        .delay(1000,TimeUnit.MILLISECONDS)
+        .subscribeOn(schedulers.io()).observeOn(schedulers.ui())
 
     fun getPersonContent(): Flowable<List<PersonContent>> = personDao.getAll()
         .subscribeOn(schedulers.io())

@@ -7,4 +7,6 @@ import com.arellomobile.mvp.MvpView
  * @author YWeber
  * project TaskManager */
 
-interface AuthView : MvpView
+interface AuthView : MvpView{
+    fun showProgress(progress:Boolean)
+}
