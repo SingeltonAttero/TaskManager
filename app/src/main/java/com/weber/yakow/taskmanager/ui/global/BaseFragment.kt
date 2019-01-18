@@ -56,5 +56,5 @@ abstract class BaseFragment : MvpAppCompatFragment(), ComponentDisposableBind by
         }
     }
 
-    open fun onBackPressed() { Timber.d("back pressed") }
+    open fun onBackPressed() {}
 }

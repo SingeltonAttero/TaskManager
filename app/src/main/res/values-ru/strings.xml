@@ -3,4 +3,7 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="sing_in">sing in</string>
+    <string name="task">Цели</string>
+    <string name="app_name">Task Manager</string>
+    <string name="password_recover">восстановление пароля</string>
 </resources>

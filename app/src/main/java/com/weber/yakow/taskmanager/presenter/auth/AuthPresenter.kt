@@ -5,6 +5,7 @@ import com.weber.yakow.taskmanager.Screens
 import com.weber.yakow.taskmanager.extension.printConstruction
 import com.weber.yakow.taskmanager.model.interactor.MainInteractor
 import com.weber.yakow.taskmanager.presenter.global.BasePresenter
+import com.weber.yakow.taskmanager.system.FlowRouter
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
 import javax.inject.Inject
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @InjectViewState
 class AuthPresenter @Inject constructor(
     private val router: Router,
-    private val interactor: MainInteractor
+    private val interactor: MainInteractor,
+    private val flowRouter: FlowRouter
 ) : BasePresenter<AuthView>() {
     init {
         printConstruction()
@@ -33,4 +35,8 @@ class AuthPresenter @Inject constructor(
                 Timber.e(it)
             }).bind()
     }
+
+    fun toGoPasswordRecoverScreen() = flowRouter.startFlow(Screens.PasswordRecoverScreen)
+
+    fun onBackPressed() = router.exit()
 }

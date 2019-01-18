@@ -2,6 +2,7 @@ package com.weber.yakow.taskmanager.ui.manager
 
 import android.os.Bundle
 import android.view.View
+import com.weber.yakow.taskmanager.R
 import com.weber.yakow.taskmanager.Screens
 import com.weber.yakow.taskmanager.extension.setLaunchScreen
 import com.weber.yakow.taskmanager.toothpick.DI
@@ -38,7 +39,7 @@ class TaskManagerFlowFragment : BaseFlowFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar(true)
+        initToolbar(true,getString(R.string.task))
     }
 
     override fun initScope() {
@@ -47,8 +48,4 @@ class TaskManagerFlowFragment : BaseFlowFragment() {
         Toothpick.inject(this, openScopes)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        toast("back")
-    }
 }

@@ -1,6 +1,7 @@
 package com.weber.yakow.taskmanager.ui.auth
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -12,7 +13,6 @@ import com.weber.yakow.taskmanager.toothpick.DI
 import com.weber.yakow.taskmanager.ui.global.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_auth.*
-import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
 import java.util.concurrent.TimeUnit
 
@@ -46,10 +46,22 @@ class AuthFragment : BaseFragment(), AuthView {
                 .subscribe {
                     presenter.goToManagerFlow()
                 }.bind()
+         RxView.clicks(passwordRecoverView)
+                .debounce(400, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    presenter.toGoPasswordRecoverScreen()
+                }.bind()
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.sing_in)
+
     }
 
     override fun showProgress(progress: Boolean) {
         progressDialog(progress)
+    }
+
+    override fun onBackPressed() {
+        presenter.onBackPressed()
     }
 
 }

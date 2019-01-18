@@ -12,6 +12,7 @@ import com.weber.yakow.taskmanager.extension.setLaunchScreen
 import com.weber.yakow.taskmanager.presenter.MainPresenter
 import com.weber.yakow.taskmanager.presenter.MainView
 import com.weber.yakow.taskmanager.toothpick.DI
+import com.weber.yakow.taskmanager.ui.global.BaseFragment
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
@@ -31,6 +32,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
+    private val currentFragment:BaseFragment?
+        get() = supportFragmentManager.findFragmentById(R.id.appMainContainer) as BaseFragment?
+
     private val navigator: SupportAppNavigator by lazy {
         object : SupportAppNavigator(this, supportFragmentManager, R.id.appMainContainer) {
             override fun setupFragmentTransaction(
@@ -49,6 +53,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navigator.setLaunchScreen(Screens.AuthFlow)
+    }
+
+    override fun onBackPressed() {
+        currentFragment?.onBackPressed() ?: super.onBackPressed()
     }
 
     override fun onResumeFragments() {

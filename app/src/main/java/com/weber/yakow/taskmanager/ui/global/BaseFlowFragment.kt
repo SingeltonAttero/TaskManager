@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import com.weber.yakow.taskmanager.R
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.support.v4.toast
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
@@ -23,10 +24,13 @@ abstract class BaseFlowFragment : BaseFragment() {
 
     abstract fun initScope()
 
+    private val currentFragment: BaseFragment?
+        get() = childFragmentManager.findFragmentById(R.id.baseFlowContainer) as BaseFragment
+
     protected val navigator: SupportAppNavigator by lazy {
         object : SupportAppNavigator(activity, childFragmentManager, R.id.baseFlowContainer) {
             override fun activityBack() {
-                onBackPressed()
+                onExit()
             }
 
             override fun setupFragmentTransaction(
@@ -51,11 +55,18 @@ abstract class BaseFlowFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    protected fun initToolbar(isBackTo: Boolean) {
+    protected fun initToolbar(isBackTo: Boolean,title:String = getString(R.string.app_name)) {
         val activity = activity as AppCompatActivity
         activity.setSupportActionBar(toolbar)
+        activity.supportActionBar?.title = title
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(isBackTo)
     }
+
+    override fun onBackPressed() {
+        currentFragment?.onBackPressed() ?: super.onBackPressed()
+    }
+
+    open fun onExit() {}
 
     override fun onResume() {
         super.onResume()
